@@ -37,8 +37,8 @@ error_reporting(E_ALL);
 
 require_once("./lib/Simplify.php");
 
-Simplify::$publicKey = 'sbpb_MzIxYmFjYzItYThiYS00ZDA3LTllZTctY2ZjYjIxY2QzYWMw';      // 'YOUR_PUBLIC_API_KEY';
-Simplify::$privateKey = 'gEEh+NSgYUi4dqG+u3F3iTuOK4n1L01StM60skz7CUR5YFFQL0ODSXAOkNtXTToq'; // 'YOUR_PRIVATE_API_KEY';
+Simplify::$publicKey = 'YOUR_PUBLIC_API_KEY'; // such as  'sbpb_MzIxYmFjYzItYThiYS00ZDA3LTllZTctY2ZjYjIxY2QzYWMw';
+Simplify::$privateKey =  'YOUR_PRIVATE_API_KEY'; // such as 'gEEh+NSgYUi4dqG+u3F3iTuOK4n1L01StM60skz7CUR5YFFQL0ODSXAOkNtXTToq';
 
 
 $token = $_POST['simplifyToken'];
