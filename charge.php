@@ -27,18 +27,37 @@
  * SUCH DAMAGE.
  */
 
+
+header('Content-Type: application/json');
+error_reporting(E_ALL);
+
 require_once("./lib/Simplify.php");
-echo "changed\n";
+
 Simplify::$publicKey = 'sbpb_MzIxYmFjYzItYThiYS00ZDA3LTllZTctY2ZjYjIxY2QzYWMw';
 Simplify::$privateKey = 'gEEh+NSgYUi4dqG+u3F3iTuOK4n1L01StM60skz7CUR5YFFQL0ODSXAOkNtXTToq'; // 'YOUR_PRIVATE_API_KEY';
+
+
 $token = $_POST['simplifyToken'];
-$payment = Simplify_Payment::createPayment(array(
-    'amount' => '1000',
+//$charge = $_POST['charge'];
+$charge = 1000;
+
+
+
+$c = array(
+    'amount' =>  $charge,
     'token' => $token,
     'description' => 'prod description',
     'currency' => 'USD'
-));
-if ($payment->paymentStatus == 'APPROVED') {
-    echo "Payment approved\n";
+
+);
+try {
+    $charge = Simplify_Payment::createPayment($c);
+
+    $chargeId = $charge->{'id'};
+    echo $charge->{'paymentStatus'}." charged :".$charge->{'amount'}/100;
+
+} catch (Exception $e) {
+    echo ' Caught exception: ',  $e->getMessage(), "\n", $e;
 }
+
 ?>
