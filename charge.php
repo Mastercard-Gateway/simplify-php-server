@@ -27,26 +27,32 @@
  * SUCH DAMAGE.
  */
 
-
+ /*    Instructions:
+  *    1. Replace public key and private key with your respective API keys
+  *    2. This sample code charges $10 to the card token submitted. You can pass the charge parameter by uncommenting
+  *       the charge parameter
+  */
 header('Content-Type: application/json');
 error_reporting(E_ALL);
 
 require_once("./lib/Simplify.php");
 
-Simplify::$publicKey = 'sbpb_MzIxYmFjYzItYThiYS00ZDA3LTllZTctY2ZjYjIxY2QzYWMw';
+Simplify::$publicKey = 'sbpb_MzIxYmFjYzItYThiYS00ZDA3LTllZTctY2ZjYjIxY2QzYWMw';      // 'YOUR_PUBLIC_API_KEY';
 Simplify::$privateKey = 'gEEh+NSgYUi4dqG+u3F3iTuOK4n1L01StM60skz7CUR5YFFQL0ODSXAOkNtXTToq'; // 'YOUR_PRIVATE_API_KEY';
 
 
 $token = $_POST['simplifyToken'];
-//$charge = $_POST['charge'];
-$charge = 1000;
+//You can get the charge from the client by uncommenting line below
+// $charge = $_POST['charge'];
+
+$charge = 1000;  // charges $10
 
 
 
 $c = array(
     'amount' =>  $charge,
     'token' => $token,
-    'description' => 'prod description',
+    'description' => 'product description',
     'currency' => 'USD'
 
 );
