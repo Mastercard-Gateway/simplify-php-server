@@ -46,7 +46,7 @@
 				});
 
 				request.fail(function( jqXHR, textStatus ) {
-					alert( "Request failed: " + textStatus );
+					console.log('###### response = ', jqXHR, textStatus);
 				});
             }
         }
