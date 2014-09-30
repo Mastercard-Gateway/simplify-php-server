@@ -30,9 +30,24 @@
                 console.log('#### token = ', token);
                 var amount = $('#amount').val();
                 console.log('##### Charging amount = ', amount);
+				/*
                 $.post("/charge.php", { simplifyToken: token, amount: amount}, function (data){
                     console.log('#### Success', data);
                 });
+                */
+				var request = $.ajax({
+					url: "/charge.php",
+					type: "POST",
+					data: { simplifyToken: token, amount: amount}
+				});
+
+				request.done(function( msg ) {
+					console.log('###### Done ', msg);
+				});
+
+				request.fail(function( jqXHR, textStatus ) {
+					alert( "Request failed: " + textStatus );
+				});
             }
         }
 
@@ -63,7 +78,7 @@
 
     <form role="form" class="form-horizontal" id="simplify-payment-form">
         <div class="form-group">
-            <label>Amount</label>
+            <label class="col-sm-2">Amount</label>
             <input id="amount"  class="form-control" type="text" maxlength="10" autocomplete="off" value="" autofocus
                    placeholder="Enter Amount"/>
         </div>
