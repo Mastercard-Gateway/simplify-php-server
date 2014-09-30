@@ -34,11 +34,13 @@
                 var token = data["id"];
                 console.log('#### token = ', token);
                 // Insert the token into the form so it gets submitted to the server
-                $paymentForm.append("<input type='hidden' name='simplifyToken' value='" + token + "' />");
+//                $paymentForm.append("<input type='hidden' name='simplifyToken' value='" + token + "' />");
 
                 var amount = $('#amount').val();
 
-                $.post("charge.php", { simplifyToken: token, amount: amount}, function (){
+                console.log('##### Charging amount = ', amount);
+
+                $.post("/charge.php", { simplifyToken: token, amount: amount}, function (){
                     console.log('Successfully charged!');
                 });
             }
