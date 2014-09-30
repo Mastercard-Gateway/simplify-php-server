@@ -1,7 +1,7 @@
 {
     "name": "Simplify PHP Server",
     "description": "Sample PHP based server application for processing Simplify payments",
-    "logo": "https://www.simplify.com/commerce/static/images/landing-page/logo.png",
+    "logo": "https://raw.githubusercontent.com/siddii/simplify-php-server/master/simplifyLogo.svg",
     "keywords": [
         "Simplify",
         "Commerce",

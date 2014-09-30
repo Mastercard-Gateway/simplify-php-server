@@ -36,6 +36,10 @@
 
  <body>
  <?php echo 'Server is up' ?>
+
+ <div>
+	 You can start running test payments from this <a href="paymentForm.php">payment form</a> page ...
+ </div>
  </body>
 
  </html>
