@@ -45,13 +45,17 @@
                 });
             }
         }
+
+		<?php
+			$publicKey = getenv('SIMPLIFY_API_PUBLIC_KEY');
+		?>
         $(document).ready(function () {
             $("#simplify-payment-form").on("submit", function () {
                 // Disable the submit button
                 $("#process-payment-btn").attr("disabled", "disabled");
                 // Generate a card token & handle the response
                 SimplifyCommerce.generateToken({
-                    key: "<?getenv('SIMPLIFY_API_PUBLIC_KEY')?>",
+                    key: "<?echo $publicKey?>",
                     card: {
                         number: $("#cc-number").val(),
                         cvc: $("#cc-cvc").val(),
