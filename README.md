@@ -9,6 +9,8 @@ This is an companion application to help developers start building mobile applic
 * Click on "Deploy to Heroku" button you see above
 * Go to index.php from the deployed app for next steps...
 
+###Steps for integrating with iOS & Android apps
+
 ```
 * Copy the url and paste it in your application. For example in iOS:
 ```ios
