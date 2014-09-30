@@ -40,7 +40,7 @@
 
                 console.log('##### Charging amount = ', amount);
 
-                $.post("/charge.php", { simplifyToken: token, amount: amount}).success(function (data){
+                $.post("/charge.php", { simplifyToken: token, amount: amount}).done(function (data){
                     console.log('#### Success', data);
                 });
             }
