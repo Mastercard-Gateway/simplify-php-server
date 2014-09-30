@@ -1,0 +1,15 @@
+{
+    "name": "Sample PHP based server application for processing Simplify payments",
+    "description": "This application can be used from mobile application for processing card payments.",
+    "keywords": [
+        "Simplify",
+        "Commerce",
+        "Payments"
+    ],
+    "website": "",
+    "repository": "https://github.com/siddii/simplify-php-server",
+    "env": {
+        "SIMPLIFY_API_PUBLIC_KEY": "Paste your public API key here",
+        "SIMPLIFY_API_PRIVATE_KEY": "Paste your private API key here"
+    }
+}
