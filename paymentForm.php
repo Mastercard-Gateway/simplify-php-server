@@ -73,23 +73,23 @@
 <div class="container">
     <h1>Run Payments using Simplify Commerce</h1>
 
-    <form id="simplify-payment-form" action="http://mysterious-savannah-5521.herokuapp.com/charge.php" method="POST">
-        <div>
+    <form role="form" id="simplify-payment-form" action="http://mysterious-savannah-5521.herokuapp.com/charge.php" method="POST">
+        <div class="form-group">
             <label>Amount</label>
-            <input id="amount" type="text" maxlength="10" autocomplete="off" value="" autofocus
+            <input id="amount"  class="form-control" type="text" maxlength="10" autocomplete="off" value="" autofocus
                    placeholder="Enter Amount"/>
         </div>
-        <div>
+        <div class="form-group">
             <label>Credit Card Number: </label>
-            <input id="cc-number" type="text" maxlength="20" autocomplete="off" value=""/>
+            <input id="cc-number" class="form-control" type="text" maxlength="20" autocomplete="off" value="5555555555554444"/>
         </div>
-        <div>
+        <div class="form-group">
             <label>CVC: </label>
-            <input id="cc-cvc" type="text" maxlength="4" autocomplete="off" value=""/>
+            <input id="cc-cvc" class="form-control" type="text" maxlength="4" autocomplete="off" value="123"/>
         </div>
-        <div>
+        <div class="form-group">
             <label>Expiry Date: </label>
-            <select id="cc-exp-month">
+            <select class="form-control" id="cc-exp-month">
                 <option value="01">Jan</option>
                 <option value="02">Feb</option>
                 <option value="03">Mar</option>
@@ -103,9 +103,7 @@
                 <option value="11">Nov</option>
                 <option value="12">Dec</option>
             </select>
-            <select id="cc-exp-year">
-                <option value="13">2013</option>
-                <option value="14">2014</option>
+            <select class="form-control" id="cc-exp-year">
                 <option value="15">2015</option>
                 <option value="16">2016</option>
                 <option value="17">2017</option>
