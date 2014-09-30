@@ -4,7 +4,7 @@ This is an companion application to help developers start building mobile applic
 
 ##Steps for running
 
-* Register with Heroku
+* Register with Heroku (if you haven't done do already)
 * Register with [Simplify Commerce](https://www.simplify.com/commerce/login/signup) and you will need API Keys (Under Settings/API Keys) in the next step
 * Click on "Deploy to Heroku" you see above
 * Go to index.php from the deployed app for next steps...
