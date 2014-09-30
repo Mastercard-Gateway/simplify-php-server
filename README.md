@@ -2,3 +2,7 @@ Simplify payment example [![Deploy](https://www.herokucdn.com/deploy/button.png)
 =========================
 This is an companion application to help developers start building a mobile application using Simplify Commerce by MasterCard to accept payments.
 
+
+##Steps
+
+* Register with Heroku if you haven't done so
