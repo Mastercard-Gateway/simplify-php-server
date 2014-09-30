@@ -40,7 +40,7 @@
 			$publicKey = getenv('SIMPLIFY_API_PUBLIC_KEY');
 		?>
         $(document).ready(function () {
-            $("#simplify-payment-form").on("submit", function () {
+            $("#process-payment-btn").click(function () {
                 // Disable the submit button
                 $("#process-payment-btn").attr("disabled", "disabled");
                 // Generate a card token & handle the response
@@ -53,8 +53,6 @@
                         expYear: $("#cc-exp-year").val()
                     }
                 }, simplifyResponseHandler);
-                // Prevent the form from submitting
-                return false;
             });
         });
     </script>
@@ -63,7 +61,7 @@
 <div class="container">
     <h1>Run Payments using Simplify Commerce</h1>
 
-    <form role="form" class="form-horizontal" id="simplify-payment-form" action="http://mysterious-savannah-5521.herokuapp.com/charge.php" method="POST">
+    <form role="form" class="form-horizontal" id="simplify-payment-form">
         <div class="form-group">
             <label>Amount</label>
             <input id="amount"  class="form-control" type="text" maxlength="10" autocomplete="off" value="" autofocus
