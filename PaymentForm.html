@@ -40,8 +40,8 @@
 
                 console.log('##### Charging amount = ', amount);
 
-                $.post("/charge.php", { simplifyToken: token, amount: amount}, function (){
-                    console.log('Successfully charged!');
+                $.post("/charge.php", { simplifyToken: token, amount: amount}, function (data){
+                    console.log('Successfully charged!', data);
                 });
             }
         }
@@ -112,7 +112,7 @@
                 <option value="22">2022</option>
             </select>
         </div>
-        <button id="process-payment-btn" type="submit">Process Payment</button>
+        <button class="btn btn-primary" id="process-payment-btn" type="submit">Process Payment</button>
     </form>
 </div>
 </body>
