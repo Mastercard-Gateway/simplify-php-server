@@ -43,11 +43,11 @@
 				});
 
 				request.done(function( msg ) {
-					console.log('###### Done ', msg);
+					alert("Payment successfully processed!")
 				});
 
 				request.fail(function( jqXHR, textStatus ) {
-					console.log('###### response = ', jqXHR, textStatus);
+					console.error('Payment processing failed = ', jqXHR, textStatus);
 				});
             }
         }
