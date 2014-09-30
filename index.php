@@ -37,9 +37,15 @@
  <body>
  <?php echo 'Server is up' ?>
 
- <div>
+ <br/>
+ <h3>
 	 You can start running test payments from this <a href="paymentForm.php">payment form</a> page ...
- </div>
+ </h3>
+
+ <h3>
+	 For running payments from your mobile applications, you can POST <i>simplifyToken</i> & <i>amount</i> to charge.php...
+ </h3>
+
  </body>
 
  </html>
