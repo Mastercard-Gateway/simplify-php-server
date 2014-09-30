@@ -11,11 +11,9 @@
     <script type="text/javascript">
         function simplifyResponseHandler(data) {
             var $paymentForm = $("#simplify-payment-form");
-            // Remove all previous errors
             $(".error").remove();
-            // Check for errors
+			$("#process-payment-btn").removeAttr("disabled");
             if (data.error) {
-                // Show any validation errors
                 if (data.error.code == "validation") {
                     var fieldErrors = data.error.fieldErrors,
                             fieldErrorsLength = fieldErrors.length,
@@ -24,23 +22,15 @@
                         errorList += "<div class='error'>Field: '" + fieldErrors[i].field +
                                 "' is invalid - " + fieldErrors[i].message + "</div>";
                     }
-                    // Display the errors
                     $paymentForm.after(errorList);
                 }
-                // Re-enable the submit button
-                $("#process-payment-btn").removeAttr("disabled");
             } else {
                 // The token contains id, last4, and card type
                 var token = data["id"];
                 console.log('#### token = ', token);
-                // Insert the token into the form so it gets submitted to the server
-//                $paymentForm.append("<input type='hidden' name='simplifyToken' value='" + token + "' />");
-
                 var amount = $('#amount').val();
-
                 console.log('##### Charging amount = ', amount);
-
-                $.post("/charge.php", { simplifyToken: token, amount: amount}).done(function (data){
+                $.post("/charge.php", { simplifyToken: token, amount: amount}, function (data){
                     console.log('#### Success', data);
                 });
             }
@@ -73,7 +63,7 @@
 <div class="container">
     <h1>Run Payments using Simplify Commerce</h1>
 
-    <form role="form" id="simplify-payment-form" action="http://mysterious-savannah-5521.herokuapp.com/charge.php" method="POST">
+    <form role="form" class="form-horizontal" id="simplify-payment-form" action="http://mysterious-savannah-5521.herokuapp.com/charge.php" method="POST">
         <div class="form-group">
             <label>Amount</label>
             <input id="amount"  class="form-control" type="text" maxlength="10" autocomplete="off" value="" autofocus
