@@ -51,7 +51,7 @@
                 $("#process-payment-btn").attr("disabled", "disabled");
                 // Generate a card token & handle the response
                 SimplifyCommerce.generateToken({
-                    key: "sbpb_YmFkMDg3NjItZWUzMy00MjUzLTgyMmItZWM3MDYzMmQyNmMx",
+                    key: "<?getenv('SIMPLIFY_API_PUBLIC_KEY')?>",
                     card: {
                         number: $("#cc-number").val(),
                         cvc: $("#cc-cvc").val(),
