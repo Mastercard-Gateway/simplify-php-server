@@ -27,7 +27,7 @@
  * SUCH DAMAGE.
  */
 
- /*    Instructions:
+/*    Instructions:
   *    1. Replace public key and private key with your respective API keys
   *    2. This sample code charges $10 to the card token submitted. You can pass the charge parameter by uncommenting
   *       the charge parameter
@@ -45,25 +45,27 @@ $token = $_POST['simplifyToken'];
 //You can get the charge from the client by uncommenting line below
 // $charge = $_POST['charge'];
 
-$charge = 1000;  // charges $10
+$charge = 1000;
 
-
+if (isset($_POST["amount"]) && !empty($_POST["amount"])) {
+	$charge = $_POST["amount"];
+}
 
 $c = array(
-    'amount' =>  $charge,
-    'token' => $token,
-    'description' => 'product description',
-    'currency' => 'USD'
+	'amount' => $charge,
+	'token' => $token,
+	'description' => 'product description',
+	'currency' => 'USD'
 
 );
 try {
-    $charge = Simplify_Payment::createPayment($c);
+	$charge = Simplify_Payment::createPayment($c);
 
-    $chargeId = $charge->{'id'};
-    echo $charge->{'paymentStatus'}." charged :".$charge->{'amount'}/100;
+	$chargeId = $charge->{'id'};
+	echo $charge->{'paymentStatus'} . " charged :" . $charge->{'amount'} / 100;
 
 } catch (Exception $e) {
-    echo ' Caught exception: ',  $e->getMessage(), "\n", $e;
+	echo ' Caught exception: ', $e->getMessage(), "\n", $e;
 }
 
 ?>
