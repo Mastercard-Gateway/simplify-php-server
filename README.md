@@ -1,6 +1,6 @@
 Simplify Payment PHP Server [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 =========================
-This is an companion application to help developers start building mobile applications using Simplify Commerce by MasterCard to accept payments.
+This is an companion application to help developers start building mobile applications using Simplify Commerce by MasterCard to accept payments. For more information on how Simplify Commerce works, please go through the overview section of Tutorial at Simplify.com -  https://www.simplify.com/commerce/docs/tutorial/index
 
 ##Steps for running
 
