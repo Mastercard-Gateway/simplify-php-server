@@ -1,14 +1,14 @@
 {
     "name": "Simplify PHP Server",
     "description": "Sample PHP based server application for processing Simplify payments",
-    "logo": "https://raw.githubusercontent.com/siddii/simplify-php-server/master/simplifyLogo.png",
+    "logo": "https://raw.githubusercontent.com/simplifycom/simplify-php-server/master/simplifyLogo.png",
     "keywords": [
         "Simplify",
         "Commerce",
         "Payments"
     ],
     "website": "http://simplify.com",
-    "repository": "https://github.com/siddii/simplify-php-server",
+    "repository": "https://github.com/simplifycom/simplify-php-server",
     "env": {
         "SIMPLIFY_API_PUBLIC_KEY": "Paste your public API key here",
         "SIMPLIFY_API_PRIVATE_KEY": "Paste your private API key here"
