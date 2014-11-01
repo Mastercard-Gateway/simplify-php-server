@@ -79,7 +79,7 @@
 
     <form role="form" class="form-horizontal" id="simplify-payment-form">
         <div class="form-group">
-            <label class="col-sm-2">Amount</label>
+            <label class="col-sm-2">Amount in cents (i.e. 50 = $0.50)</label>
             <input id="amount"  class="form-control" type="text" maxlength="10" autocomplete="off" value="" autofocus
                    placeholder="Enter Amount"/>
         </div>
