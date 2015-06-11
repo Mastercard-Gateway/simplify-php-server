@@ -27,35 +27,48 @@ NSURL *url= [NSURL URLWithString:@"http://arcane-ridge-6454.herokuapp.com/charge
 ```
 * Or in Android:
 ```java
-String data = "your data";
-String response;
+                        URL url = null;
+                        HttpURLConnection con = null;
+                        try {
+                           URL url = new URL("http://simplifypay.herokuapp.com//charge.php");
+                           HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                            //add reuqest header
+                            con.setRequestMethod("POST");
+                            con.setRequestProperty("User-Agent", ""Mozilla/5.0");
+                            con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 
-URL url = new URL("http://arcane-ridge-6454.herokuapp.com/charge.php");
-HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-try {
-    urlConnection.setDoOutput(true);
-    urlConnection.setChunkedStreamingMode(0);
+                            String urlParameters = "simplifyToken="+token.getId()+"&amount=1000";
 
-    OutputStream out = new BufferedOutputStream(urlConnection.getOutputStream());
-    out.write(data.getBytes("UTF-8"));
-    out.close();
+                            // Send post request
+                            con.setDoOutput(true);
+                            DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+                            wr.writeBytes(urlParameters);
+                            wr.flush();
+                            wr.close();
 
-    urlConnection.connect();
+                            int responseCode = con.getResponseCode();
+                            System.out.println("\nSending 'POST' request to URL : " + url);
+                            System.out.println("Post parameters : " + urlParameters);
+                            System.out.println("Response Code : " + responseCode);
 
-    InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-    StringBuilder sb = new StringBuilder();
-    BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-    String line = "";
-    while ((line = rd.readLine()) != null) {
-        sb.append(line);
-    }
-    in.close();
+                            BufferedReader in = new BufferedReader(
+                                    new InputStreamReader(con.getInputStream()));
+                            String inputLine;
+                            StringBuffer response = new StringBuffer();
 
-    response = sb.toString();
-}
-finally {
-    urlConnection.disconnect();
-}
+                            while ((inputLine = in.readLine()) != null) {
+                                response.append(inputLine);
+                            }
+                            in.close();
+                            //print result
+                            System.out.println(response.toString());
+                            //
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        } finally {
+                            con.close();
+                        }
+
 ```
 
 ##References
