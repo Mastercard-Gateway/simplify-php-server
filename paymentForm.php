@@ -167,7 +167,7 @@
 			</tr>
 		</table>
 		<div class="footer-section">
-			<div class="text">For more test cards, please checkout this <a class="link" href="https://www.simplify.com/commerce/docs/tutorial/index#testing">page.</a></div>
+			<div class="text">For more test cards, please checkout this <a class="link" target="_new" href="https://www.simplify.com/commerce/docs/tutorial/index#testing">page</a>.</div>
 			<div class="error"></div>
 		</div>
 	</form>
