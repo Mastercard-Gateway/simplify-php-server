@@ -34,7 +34,7 @@
 	</div>
 	<div class="text">You can start running test payments from <a class="link" href="paymentForm.php">this payment form page.<br></a>
 	</div>
-	<div class="text">For running payments from your mobile applications, you can post <span class="code">simplifyToken</span> and <span class="code">amount</span> params to <a class="link" href="charge.php">charge.php</a>.</div>
+	<div class="text">For running payments from your mobile applications, you can post <span class="code">simplifyToken</span> and <span class="code">amount</span> params to <span class="code">charge.php</span>.</div>
 </div>
 <div class="w-section footer-section">
 	<div class="logo-container"><img class="logo" src="images/simplifyLogo@2x.png" width="102">
