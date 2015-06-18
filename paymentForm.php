@@ -98,7 +98,7 @@
 		<h1 class="main-message">Run Test Payments on Simplify Commerce</h1>
 	</div>
 	<form role="form" class="w-form" id="simplify-payment-form">
-		<table>
+		<table width="100%">
 			<tr>
 				<td><label class="text">Amount in cents (i.e. 50 = $0.50)</label></td>
 				<td><label class="text"><input id="amount"  class="w-input" type="text" maxlength="10" autocomplete="off" value="100" autofocus
@@ -145,12 +145,10 @@
 						<option value="22">2022</option>
 					</select>
 			</tr>
-			<tr>
-				<td colspan="2">
-					<button id="process-payment-btn" class="w-button">Process Payment</button>
-				</td>
-			</tr>
 		</table>
+		<div class="w-container">
+				<button id="process-payment-btn" class="w-button">Process Payment</button>
+		</div>
 	</form>
 </div>
 <div class="w-section footer-section">
