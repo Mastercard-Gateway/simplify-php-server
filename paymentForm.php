@@ -26,6 +26,9 @@
 		h1 {
 			font-family: 'Avenir Next', Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 		}
+		.footer-section {
+			margin-top: 10px;
+		}
 	</style>
 	<script type="text/javascript" src="//www.simplify.com/commerce/v1/simplify.js"></script>
 	<script type="text/javascript">
@@ -131,7 +134,7 @@
 					</select>
 			</tr>
 		</table>
-		<div class="w-container">
+		<div class="footer-section">
 				<button id="process-payment-btn" class="w-button">Process Payment</button>
 		</div>
 	</form>
