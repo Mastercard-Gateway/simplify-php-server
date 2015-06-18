@@ -96,7 +96,7 @@
 						errorMessage = "";
 					for (var i = 0; i < fieldErrorsLength; i++) {
 						errorMessage += " Field: '" + fieldErrors[i].field +
-							"' is invalid - " + fieldErrors[i].message;
+							"' is invalid - " + fieldErrors[i].message + "<br/>";
 					}
 					$error.text(errorMessage);
 				}
