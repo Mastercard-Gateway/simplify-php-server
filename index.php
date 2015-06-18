@@ -31,21 +31,19 @@
  <!DOCTYPE html>
  <html lang="en">
  <head>
-
+	 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
  </head>
 
  <body>
- <?php echo 'Server is up' ?>
-
- <br/>
- <h3>
-	 You can start running test payments from this <a href="paymentForm.php">payment form</a> page ...
- </h3>
-
- <h3>
-	 For running payments from your mobile applications, you can POST <i>simplifyToken</i> & <i>amount</i> to charge.php...
- </h3>
-
+ <div class="container">
+	 <h1 class="text-center"><?php echo 'Heya... server is up and running!' ?></h1>
+	 <h3 class="text-center">
+		 You can start running test payments from this <a href="paymentForm.php">payment form</a> page ...
+	 </h3>
+	 <h3 class="text-center">
+		 For running payments from your mobile applications, you can POST <code>simplifyToken</code> & <code>amount</code> params to charge.php...
+	 </h3>
+ </div>
  </body>
 
  </html>
