@@ -98,7 +98,7 @@
 						errorMessage += " Field: '" + fieldErrors[i].field +
 							"' is invalid - " + fieldErrors[i].message + "<br/>";
 					}
-					$error.text(errorMessage);
+					$error.html(errorMessage);
 				}
 			} else {
 				var token = data["id"];
