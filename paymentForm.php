@@ -74,22 +74,6 @@
 		<?php
 			$publicKey = getenv('SIMPLIFY_API_PUBLIC_KEY');
 		?>
-		$(document).ready(function () {
-			$("#process-payment-btn").click(function () {
-				// Disable the submit button
-				$("#process-payment-btn").attr("disabled", "disabled");
-				// Generate a card token & handle the response
-				SimplifyCommerce.generateToken({
-					key: "<?echo $publicKey?>",
-					card: {
-						number: $("#cc-number").val(),
-						cvc: $("#cc-cvc").val(),
-						expMonth: $("#cc-exp-month").val(),
-						expYear: $("#cc-exp-year").val()
-					}
-				}, simplifyResponseHandler);
-			});
-		});
 	</script>
 </head>
 <body>
@@ -158,5 +142,23 @@
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript" src="js/webflow.js"></script>
 <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#process-payment-btn").click(function () {
+			// Disable the submit button
+			$("#process-payment-btn").attr("disabled", "disabled");
+			// Generate a card token & handle the response
+			SimplifyCommerce.generateToken({
+				key: "<?echo $publicKey?>",
+				card: {
+					number: $("#cc-number").val(),
+					cvc: $("#cc-cvc").val(),
+					expMonth: $("#cc-exp-month").val(),
+					expYear: $("#cc-exp-year").val()
+				}
+			}, simplifyResponseHandler);
+		});
+	});
+</script>
 </body>
 </html>
