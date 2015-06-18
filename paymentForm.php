@@ -120,7 +120,7 @@
 	<form role="form" class="w-form" id="simplify-payment-form">
 		<table width="100%">
 			<tr>
-				<td><label class="text">Amount in cents (i.e. 50 = $0.50)</label></td>
+				<td><label class="text">Amount in cents (i.e. 50 = $0.50): </label></td>
 				<td><label class="text"><input id="amount" class="w-input" type="text" maxlength="10" autocomplete="off"
 											   value="100" autofocus
 											   placeholder="Enter Amount"/>
