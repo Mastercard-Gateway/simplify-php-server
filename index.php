@@ -2,7 +2,7 @@
 <html data-wf-site="5582f9e5792714e458bb85b8" data-wf-page="5582f9e5792714e458bb85b9">
 <head>
 	<meta charset="utf-8">
-	<title>simplify-test</title>
+	<title>Simplify PHP starter app</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="generator" content="Webflow">
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
@@ -21,6 +21,7 @@
 	<style>
 		body {
 			font-family: 'Avenir Next', Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+			text-rendering: optimizeLegibility;
 		}
 		h1 {
 			font-family: 'Avenir Next', Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif;
