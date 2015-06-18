@@ -1,38 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-wf-site="5582f9e5792714e458bb85b8" data-wf-page="5582f9e5792714e458bb85b9">
 <head>
-    <meta charset="utf-8"/>
-    <title>Simplify Commerce Getting Started Form</title>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script type="text/javascript" src="//www.simplify.com/commerce/v1/simplify.js"></script>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <script type="text/javascript">
-        function simplifyResponseHandler(data) {
-            var $paymentForm = $("#simplify-payment-form");
-            $(".error").remove();
+	<meta charset="utf-8">
+	<title>simplify-test</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="generator" content="Webflow">
+	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="css/webflow.css">
+	<link rel="stylesheet" type="text/css" href="css/simplify-test.webflow.css">
+	<script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+	<script>
+		WebFont.load({
+			google: {
+				families: ["Inconsolata:400,400italic,700,700italic"]
+			}
+		});
+	</script>
+	<script type="text/javascript" src="js/modernizr.js"></script>
+	<link rel="apple-touch-icon" href="//daks2k3a4ib2z.cloudfront.net/img/webclip.png">
+	<style>
+		body {
+			font-family: 'Avenir Next', Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+		}
+		h1 {
+			font-family: 'Avenir Next', Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+		}
+	</style>
+	<script type="text/javascript" src="//www.simplify.com/commerce/v1/simplify.js"></script>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<script type="text/javascript">
+		function simplifyResponseHandler(data) {
+			var $paymentForm = $("#simplify-payment-form");
+			$(".error").remove();
 			$("#process-payment-btn").removeAttr("disabled");
-            if (data.error) {
-                if (data.error.code == "validation") {
-                    var fieldErrors = data.error.fieldErrors,
-                            fieldErrorsLength = fieldErrors.length,
-                            errorList = "";
-                    for (var i = 0; i < fieldErrorsLength; i++) {
-                        errorList += "<div class='error'>Field: '" + fieldErrors[i].field +
-                                "' is invalid - " + fieldErrors[i].message + "</div>";
-                    }
-                    $paymentForm.after(errorList);
-                }
-            } else {
-                // The token contains id, last4, and card type
-                var token = data["id"];
-                console.log('#### token = ', token);
-                var amount = $('#amount').val();
-                console.log('##### Charging amount = ', amount);
+			if (data.error) {
+				if (data.error.code == "validation") {
+					var fieldErrors = data.error.fieldErrors,
+						fieldErrorsLength = fieldErrors.length,
+						errorList = "";
+					for (var i = 0; i < fieldErrorsLength; i++) {
+						errorList += "<div class='error'>Field: '" + fieldErrors[i].field +
+							"' is invalid - " + fieldErrors[i].message + "</div>";
+					}
+					$paymentForm.after(errorList);
+				}
+			} else {
+				// The token contains id, last4, and card type
+				var token = data["id"];
+				console.log('#### token = ', token);
+				var amount = $('#amount').val();
+				console.log('##### Charging amount = ', amount);
 				/*
-                $.post("/charge.php", { simplifyToken: token, amount: amount}, function (data){
-                    console.log('#### Success', data);
-                });
-                */
+				 $.post("/charge.php", { simplifyToken: token, amount: amount}, function (data){
+				 console.log('#### Success', data);
+				 });
+				 */
 				var request = $.ajax({
 					url: "/charge.php",
 					type: "POST",
@@ -47,77 +69,85 @@
 				request.fail(function( jqXHR, textStatus ) {
 					console.error('Payment processing failed = ', jqXHR, textStatus);
 				});
-            }
-        }
+			}
+		}
 
 		<?php
 			$publicKey = getenv('SIMPLIFY_API_PUBLIC_KEY');
 		?>
-        $(document).ready(function () {
-            $("#process-payment-btn").click(function () {
-                // Disable the submit button
-                $("#process-payment-btn").attr("disabled", "disabled");
-                // Generate a card token & handle the response
-                SimplifyCommerce.generateToken({
-                    key: "<?echo $publicKey?>",
-                    card: {
-                        number: $("#cc-number").val(),
-                        cvc: $("#cc-cvc").val(),
-                        expMonth: $("#cc-exp-month").val(),
-                        expYear: $("#cc-exp-year").val()
-                    }
-                }, simplifyResponseHandler);
-            });
-        });
-    </script>
+		$(document).ready(function () {
+			$("#process-payment-btn").click(function () {
+				// Disable the submit button
+				$("#process-payment-btn").attr("disabled", "disabled");
+				// Generate a card token & handle the response
+				SimplifyCommerce.generateToken({
+					key: "<?echo $publicKey?>",
+					card: {
+						number: $("#cc-number").val(),
+						cvc: $("#cc-cvc").val(),
+						expMonth: $("#cc-exp-month").val(),
+						expYear: $("#cc-exp-year").val()
+					}
+				}, simplifyResponseHandler);
+			});
+		});
+	</script>
 </head>
 <body>
-<div class="container">
-    <h1>Run Payments using Simplify Commerce</h1>
-
-    <form role="form" class="form-horizontal" id="simplify-payment-form">
-        <div class="form-group">
-            <label>Amount in cents (i.e. 50 = $0.50)</label>
-            <input id="amount"  class="form-control" type="text" maxlength="10" autocomplete="off" value="" autofocus
-                   placeholder="Enter Amount"/>
-        </div>
-        <div class="form-group">
-            <label>Credit Card Number: </label>
-            <input id="cc-number" class="form-control" type="text" maxlength="20" autocomplete="off" value="5555555555554444"/>
-        </div>
-        <div class="form-group">
-            <label>CVC: </label>
-            <input id="cc-cvc" class="form-control" type="text" maxlength="4" autocomplete="off" value="123"/>
-        </div>
-        <div class="form-group">
-            <label>Expiry Date: </label>
-            <select class="form-control" id="cc-exp-month">
-                <option value="01">Jan</option>
-                <option value="02">Feb</option>
-                <option value="03">Mar</option>
-                <option value="04">Apr</option>
-                <option value="05">May</option>
-                <option value="06">Jun</option>
-                <option value="07">Jul</option>
-                <option value="08">Aug</option>
-                <option value="09">Sep</option>
-                <option value="10">Oct</option>
-                <option value="11">Nov</option>
-                <option value="12">Dec</option>
-            </select>
-            <select class="form-control" id="cc-exp-year">
-                <option value="15">2015</option>
-                <option value="16">2016</option>
-                <option value="17">2017</option>
-                <option value="18">2018</option>
-                <option value="19">2019</option>
-                <option value="20">2020</option>
-                <option value="21">2021</option>
-                <option value="22">2022</option>
-            </select>
-        </div>
-        <button class="btn btn-primary" id="process-payment-btn" type="btn">Process Payment</button>
-    </form>
+<div class="w-container message">
+	<div>
+		<h1 class="main-message">Run Test Payments on Simplify Commerce</h1>
+	</div>
+	<form role="form" class="w-form" id="simplify-payment-form">
+		<div>
+			<label>Amount in cents (i.e. 50 = $0.50)</label>
+			<input id="amount"  class="form-control" type="text" maxlength="10" autocomplete="off" value="" autofocus
+				   placeholder="Enter Amount"/>
+		</div>
+		<div class="form-group">
+			<label>Credit Card Number: </label>
+			<input id="cc-number" class="form-control" type="text" maxlength="20" autocomplete="off" value="5555555555554444"/>
+		</div>
+		<div class="form-group">
+			<label>CVC: </label>
+			<input id="cc-cvc" class="form-control" type="text" maxlength="4" autocomplete="off" value="123"/>
+		</div>
+		<div class="form-group">
+			<label>Expiry Date: </label>
+			<select class="form-control" id="cc-exp-month">
+				<option value="01">Jan</option>
+				<option value="02">Feb</option>
+				<option value="03">Mar</option>
+				<option value="04">Apr</option>
+				<option value="05">May</option>
+				<option value="06">Jun</option>
+				<option value="07">Jul</option>
+				<option value="08">Aug</option>
+				<option value="09">Sep</option>
+				<option value="10">Oct</option>
+				<option value="11">Nov</option>
+				<option value="12">Dec</option>
+			</select>
+			<select class="form-control" id="cc-exp-year">
+				<option value="15">2015</option>
+				<option value="16">2016</option>
+				<option value="17">2017</option>
+				<option value="18">2018</option>
+				<option value="19">2019</option>
+				<option value="20">2020</option>
+				<option value="21">2021</option>
+				<option value="22">2022</option>
+			</select>
+		</div>
+		<button class="btn btn-primary" id="process-payment-btn" type="btn">Process Payment</button>
+	</form>
 </div>
+<div class="w-section footer-section">
+	<div class="logo-container"><img class="logo" src="images/simplifyLogo@2x.png" width="102">
+	</div>
+</div>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/webflow.js"></script>
+<!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
 </body>
 </html>
