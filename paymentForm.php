@@ -32,6 +32,9 @@
 		.error {
 			color: red;
 		}
+		.message {
+			margin-top: 50px;
+		}
 	</style>
 		<?php
 			$publicKey = getenv('SIMPLIFY_API_PUBLIC_KEY');
@@ -125,7 +128,7 @@
 
 	function simplifyResponseHandler(data) {
 		var $error = $(".error");
-		$error.clear();
+		$error.html("");
 		$("#process-payment-btn").removeAttr("disabled");
 		if (data.error) {
 			console.error("Error creating card token", data);
