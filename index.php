@@ -36,19 +36,24 @@
 		 .container {
 			 margin-top: 20px;
 		 }
+
+		 .img {
+			 text-align: center;
+		 }
+
 	 </style>
  </head>
 
  <body>
- <div class="container">
-	 <img class="text-center" src="https://raw.githubusercontent.com/simplifycom/simplify-php-server/master/simplifyLogo.png"/>
+ <div class="container-fluid">
+	 <img class="img-responsive" src="https://raw.githubusercontent.com/simplifycom/simplify-php-server/master/simplifyLogo.png"/>
 	 <h1 class="text-center"><?php echo 'Heya... server is up and running!' ?></h1>
 	 <h3 class="text-center">
 		 You can start running test payments from this <a href="paymentForm.php">payment form</a> page ...
 	 </h3>
-	 <h3 class="text-center">
+	 <h4 class="text-center">
 		 For running payments from your mobile applications, you can POST <code>simplifyToken</code> & <code>amount</code> params to charge.php...
-	 </h3>
+	 </h4>
  </div>
  </body>
 
