@@ -29,11 +29,13 @@
 		.footer-section {
 			margin-top: 10px;
 		}
+		.error {
+			color: red;
+		}
 	</style>
 		<?php
 			$publicKey = getenv('SIMPLIFY_API_PUBLIC_KEY');
 		?>
-	</script>
 </head>
 <body>
 <div class="w-container message">
@@ -91,6 +93,7 @@
 		</table>
 		<div class="footer-section">
 				<button id="process-payment-btn" class="w-button">Process Payment</button>
+				<div class="error"></div>
 		</div>
 	</form>
 </div>
@@ -121,20 +124,20 @@
 	});
 
 	function simplifyResponseHandler(data) {
-		var $paymentForm = $("#simplify-payment-form");
-		$(".error").remove();
+		var $error = $(".error");
+		$error.clear();
 		$("#process-payment-btn").removeAttr("disabled");
 		if (data.error) {
 			console.error("Error creating card token", data);
 			if (data.error.code == "validation") {
 				var fieldErrors = data.error.fieldErrors,
 					fieldErrorsLength = fieldErrors.length,
-					errorList = "";
+					errorMessage = "";
 				for (var i = 0; i < fieldErrorsLength; i++) {
-					errorList += "<div class='error'>Field: '" + fieldErrors[i].field +
-						"' is invalid - " + fieldErrors[i].message + "</div>";
+					errorMessage += " Field: '" + fieldErrors[i].field +
+						"' is invalid - " + fieldErrors[i].message;
 				}
-				$paymentForm.after(errorList);
+				$error.text(errorMessage);
 			}
 		} else {
 			// The token contains id, last4, and card type
