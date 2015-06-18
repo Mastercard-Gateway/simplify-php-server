@@ -27,7 +27,6 @@
 		}
 	</style>
 	<script type="text/javascript" src="//www.simplify.com/commerce/v1/simplify.js"></script>
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<script type="text/javascript">
 		function simplifyResponseHandler(data) {
 			var $paymentForm = $("#simplify-payment-form");
