@@ -142,16 +142,8 @@
 				$error.text(errorMessage);
 			}
 		} else {
-			// The token contains id, last4, and card type
 			var token = data["id"];
-			console.log('#### token = ', token);
 			var amount = $('#amount').val();
-			console.log('##### Charging amount = ', amount);
-			/*
-			 $.post("/charge.php", { simplifyToken: token, amount: amount}, function (data){
-			 console.log('#### Success', data);
-			 });
-			 */
 			var request = $.ajax({
 				url: "/charge.php",
 				type: "POST",
