@@ -119,9 +119,9 @@
 
 		var selYear = $('#cc-exp-year');
 
-		var year = new Date().getFullYear();
-		for(; year < year + 10; year++) {
-			selYear.append("<option value='" + year.toString().substr(2) + "'>" + year +"</option>" );
+		var currentYear = new Date().getFullYear();
+		for(var year = currentYear; year < currentYear + 10; year++) {
+			selYear.append("<option " + ((year == currentYear) ? " selected " : "") + " value='" + year.toString().substr(2) + "'>" + year +"</option>" );
 		}
 	});
 
