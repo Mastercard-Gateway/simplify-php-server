@@ -36,9 +36,14 @@
 			color: red;
 		}
 
+		.success {
+			color: green;
+		}
+
 		.message {
 			margin-top: 50px;
 		}
+
 		.w-button {
 			background-color: #f60;
 			border-radius: 3px;
@@ -50,17 +55,23 @@
 	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script type="text/javascript" src="//www.simplify.com/commerce/v1/simplify.js"></script>
 	<script type="text/javascript">
+		var $selYear, $error, $success, $paymentBtn;
 		$(document).ready(function () {
-			var selYear = $('#cc-exp-year');
+			$selYear = $('#cc-exp-year');
+			$error = $(".error");
+			$success = $(".success");
+			$paymentBtn = $("#process-payment-btn");
 
 			var currentYear = new Date().getFullYear();
 			for (var year = currentYear; year < currentYear + 10; year++) {
-				selYear.append("<option " + ((year === (currentYear + 1)) ? " selected " : "") + " value='" + year.toString().substr(2) + "'>" + year + "</option>");
+				$selYear.append("<option " + ((year === (currentYear + 1)) ? " selected " : "") + " value='" + year.toString().substr(2) + "'>" + year + "</option>");
 			}
 
-			$("#process-payment-btn").click(function () {
+			$paymentBtn.click(function () {
+				$error.html("");
+				$success.html("");
 				// Disable the submit button
-				$("#process-payment-btn").attr("disabled", "disabled");
+				$paymentBtn.attr("disabled", "disabled");
 				// Generate a card token & handle the response
 				SimplifyCommerce.generateToken({
 					key: "<?echo $publicKey?>",
@@ -76,9 +87,7 @@
 		});
 
 		function simplifyResponseHandler(data) {
-			var $error = $(".error");
-			$error.html("");
-			$("#process-payment-btn").removeAttr("disabled");
+			$paymentBtn.removeAttr("disabled");
 			if (data.error) {
 				console.error("Error creating card token", data);
 				if (data.error.code == "validation") {
@@ -102,8 +111,7 @@
 				});
 
 				request.done(function (msg) {
-					console.log("##### Success message = ", msg);
-					alert("Payment successfully processed!")
+					$('.success').html("<h3>Payment successfully processed!</h3>");
 				});
 
 				request.fail(function (jqXHR, textStatus) {
@@ -170,7 +178,9 @@
 		<div class="footer-section">
 			<div class="success"></div>
 			<div class="error"></div>
-			<div class="text">For more test cards, please checkout this <a class="link" target="_new" href="https://www.simplify.com/commerce/docs/tutorial/index#testing">page</a>.</div>
+			<div class="text">For more test cards, please checkout this <a class="link" target="_new"
+																		   href="https://www.simplify.com/commerce/docs/tutorial/index#testing">page</a>.
+			</div>
 		</div>
 	</form>
 </div>
