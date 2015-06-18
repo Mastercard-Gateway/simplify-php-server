@@ -98,46 +98,54 @@
 		<h1 class="main-message">Run Test Payments on Simplify Commerce</h1>
 	</div>
 	<form role="form" class="w-form" id="simplify-payment-form">
-		<div>
-			<label>Amount in cents (i.e. 50 = $0.50)</label>
-			<input id="amount"  class="form-control" type="text" maxlength="10" autocomplete="off" value="" autofocus
-				   placeholder="Enter Amount"/>
-		</div>
-		<div class="form-group">
-			<label>Credit Card Number: </label>
-			<input id="cc-number" class="form-control" type="text" maxlength="20" autocomplete="off" value="5555555555554444"/>
-		</div>
-		<div class="form-group">
-			<label>CVC: </label>
-			<input id="cc-cvc" class="form-control" type="text" maxlength="4" autocomplete="off" value="123"/>
-		</div>
-		<div class="form-group">
-			<label>Expiry Date: </label>
-			<select class="form-control" id="cc-exp-month">
-				<option value="01">Jan</option>
-				<option value="02">Feb</option>
-				<option value="03">Mar</option>
-				<option value="04">Apr</option>
-				<option value="05">May</option>
-				<option value="06">Jun</option>
-				<option value="07">Jul</option>
-				<option value="08">Aug</option>
-				<option value="09">Sep</option>
-				<option value="10">Oct</option>
-				<option value="11">Nov</option>
-				<option value="12">Dec</option>
-			</select>
-			<select class="form-control" id="cc-exp-year">
-				<option value="15">2015</option>
-				<option value="16">2016</option>
-				<option value="17">2017</option>
-				<option value="18">2018</option>
-				<option value="19">2019</option>
-				<option value="20">2020</option>
-				<option value="21">2021</option>
-				<option value="22">2022</option>
-			</select>
-		</div>
+		<table>
+			<tr>
+				<td><label class="text">Amount in cents (i.e. 50 = $0.50)</label></td>
+				<td><label class="text"><input id="amount"  type="text" maxlength="10" autocomplete="off" value="" autofocus
+														   placeholder="Enter Amount"/>
+					</label></td>
+			</tr>
+			<tr>
+				<td><label class="text">Credit Card Number: </label></td>
+				<td>
+					<input id="cc-number" type="text" maxlength="20" autocomplete="off" value="5555555555554444"/>
+					</label></td>
+			</tr>
+			<tr>
+				<td><label class="text">CVC: </label></td>
+				<td>
+					<input id="cc-cvc" type="text" maxlength="4" autocomplete="off" value="123"/>
+					</label></td>
+			</tr>
+			<tr>
+				<td><label class="text">Expiry Date: </label></td>
+				<td>
+					<select id="cc-exp-month">
+						<option value="01">Jan</option>
+						<option value="02">Feb</option>
+						<option value="03">Mar</option>
+						<option value="04">Apr</option>
+						<option value="05">May</option>
+						<option value="06">Jun</option>
+						<option value="07">Jul</option>
+						<option value="08">Aug</option>
+						<option value="09">Sep</option>
+						<option value="10">Oct</option>
+						<option value="11">Nov</option>
+						<option value="12">Dec</option>
+					</select>
+					<select id="cc-exp-year">
+						<option value="15">2015</option>
+						<option value="16">2016</option>
+						<option value="17">2017</option>
+						<option value="18">2018</option>
+						<option value="19">2019</option>
+						<option value="20">2020</option>
+						<option value="21">2021</option>
+						<option value="22">2022</option>
+					</select>
+			</tr>
+		</table>
 		<button class="btn btn-primary" id="process-payment-btn" type="btn">Process Payment</button>
 	</form>
 </div>
