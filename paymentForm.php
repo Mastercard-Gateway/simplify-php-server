@@ -101,26 +101,26 @@
 		<table>
 			<tr>
 				<td><label class="text">Amount in cents (i.e. 50 = $0.50)</label></td>
-				<td><label class="text"><input id="amount"  type="text" maxlength="10" autocomplete="off" value="" autofocus
+				<td><label class="text"><input id="amount"  class="w-input" type="text" maxlength="10" autocomplete="off" value="100" autofocus
 														   placeholder="Enter Amount"/>
 					</label></td>
 			</tr>
 			<tr>
 				<td><label class="text">Credit Card Number: </label></td>
 				<td>
-					<input id="cc-number" type="text" maxlength="20" autocomplete="off" value="5555555555554444"/>
+					<input id="cc-number" type="text" class="w-input" maxlength="20" autocomplete="off" value="5555555555554444"/>
 					</label></td>
 			</tr>
 			<tr>
 				<td><label class="text">CVC: </label></td>
 				<td>
-					<input id="cc-cvc" type="text" maxlength="4" autocomplete="off" value="123"/>
+					<input id="cc-cvc" type="text" class="w-input" maxlength="4" autocomplete="off" value="123"/>
 					</label></td>
 			</tr>
 			<tr>
 				<td><label class="text">Expiry Date: </label></td>
 				<td>
-					<select id="cc-exp-month">
+					<select id="cc-exp-month" class="w-select">
 						<option value="01">Jan</option>
 						<option value="02">Feb</option>
 						<option value="03">Mar</option>
@@ -134,7 +134,7 @@
 						<option value="11">Nov</option>
 						<option value="12">Dec</option>
 					</select>
-					<select id="cc-exp-year">
+					<select id="cc-exp-year" class="w-select">
 						<option value="15">2015</option>
 						<option value="16">2016</option>
 						<option value="17">2017</option>
@@ -145,8 +145,12 @@
 						<option value="22">2022</option>
 					</select>
 			</tr>
+			<tr>
+				<td colspan="2">
+					<button id="process-payment-btn" class="w-button">Process Payment</button>
+				</td>
+			</tr>
 		</table>
-		<button class="btn btn-primary" id="process-payment-btn" type="btn">Process Payment</button>
 	</form>
 </div>
 <div class="w-section footer-section">
