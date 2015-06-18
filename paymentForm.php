@@ -121,7 +121,7 @@
 
 		var currentYear = new Date().getFullYear();
 		for(var year = currentYear; year < currentYear + 10; year++) {
-			selYear.append("<option " + ((year === currentYear) ? " selected " : "") + " value='" + year.toString().substr(2) + "'>" + year +"</option>" );
+			selYear.append("<option " + ((year === (currentYear + 1)) ? " selected " : "") + " value='" + year.toString().substr(2) + "'>" + year +"</option>" );
 		}
 	});
 
