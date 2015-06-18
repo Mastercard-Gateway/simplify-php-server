@@ -97,8 +97,6 @@
 	</div>
 </div>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript" src="js/webflow.js"></script>
-<!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
 <script type="text/javascript" src="//www.simplify.com/commerce/v1/simplify.js"></script>
 <script type="text/javascript">
 	$(document).ready(function () {
