@@ -102,6 +102,13 @@
 <script type="text/javascript" src="//www.simplify.com/commerce/v1/simplify.js"></script>
 <script type="text/javascript">
 	$(document).ready(function () {
+		var selYear = $('#cc-exp-year');
+
+		var currentYear = new Date().getFullYear();
+		for(var year = currentYear; year < currentYear + 10; year++) {
+			selYear.append("<option " + ((year === (currentYear + 1)) ? " selected " : "") + " value='" + year.toString().substr(2) + "'>" + year +"</option>" );
+		}
+
 		$("#process-payment-btn").click(function () {
 			// Disable the submit button
 			$("#process-payment-btn").attr("disabled", "disabled");
@@ -117,12 +124,6 @@
 			}, simplifyResponseHandler);
 		});
 
-		var selYear = $('#cc-exp-year');
-
-		var currentYear = new Date().getFullYear();
-		for(var year = currentYear; year < currentYear + 10; year++) {
-			selYear.append("<option " + ((year === (currentYear + 1)) ? " selected " : "") + " value='" + year.toString().substr(2) + "'>" + year +"</option>" );
-		}
 	});
 
 	function simplifyResponseHandler(data) {
