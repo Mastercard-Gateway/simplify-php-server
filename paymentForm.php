@@ -30,51 +30,6 @@
 			margin-top: 10px;
 		}
 	</style>
-	<script type="text/javascript" src="//www.simplify.com/commerce/v1/simplify.js"></script>
-	<script type="text/javascript">
-		function simplifyResponseHandler(data) {
-			var $paymentForm = $("#simplify-payment-form");
-			$(".error").remove();
-			$("#process-payment-btn").removeAttr("disabled");
-			if (data.error) {
-				if (data.error.code == "validation") {
-					var fieldErrors = data.error.fieldErrors,
-						fieldErrorsLength = fieldErrors.length,
-						errorList = "";
-					for (var i = 0; i < fieldErrorsLength; i++) {
-						errorList += "<div class='error'>Field: '" + fieldErrors[i].field +
-							"' is invalid - " + fieldErrors[i].message + "</div>";
-					}
-					$paymentForm.after(errorList);
-				}
-			} else {
-				// The token contains id, last4, and card type
-				var token = data["id"];
-				console.log('#### token = ', token);
-				var amount = $('#amount').val();
-				console.log('##### Charging amount = ', amount);
-				/*
-				 $.post("/charge.php", { simplifyToken: token, amount: amount}, function (data){
-				 console.log('#### Success', data);
-				 });
-				 */
-				var request = $.ajax({
-					url: "/charge.php",
-					type: "POST",
-					data: { simplifyToken: token, amount: amount},
-					dataType: "html"
-				});
-
-				request.done(function( msg ) {
-					alert("Payment successfully processed!")
-				});
-
-				request.fail(function( jqXHR, textStatus ) {
-					console.error('Payment processing failed = ', jqXHR, textStatus);
-				});
-			}
-		}
-
 		<?php
 			$publicKey = getenv('SIMPLIFY_API_PUBLIC_KEY');
 		?>
@@ -146,6 +101,7 @@
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript" src="js/webflow.js"></script>
 <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+<script type="text/javascript" src="//www.simplify.com/commerce/v1/simplify.js"></script>
 <script type="text/javascript">
 	$(document).ready(function () {
 		$("#process-payment-btn").click(function () {
@@ -163,6 +119,50 @@
 			}, simplifyResponseHandler);
 		});
 	});
+
+	function simplifyResponseHandler(data) {
+		var $paymentForm = $("#simplify-payment-form");
+		$(".error").remove();
+		$("#process-payment-btn").removeAttr("disabled");
+		if (data.error) {
+			console.error("Error creating card token", data);
+			if (data.error.code == "validation") {
+				var fieldErrors = data.error.fieldErrors,
+					fieldErrorsLength = fieldErrors.length,
+					errorList = "";
+				for (var i = 0; i < fieldErrorsLength; i++) {
+					errorList += "<div class='error'>Field: '" + fieldErrors[i].field +
+						"' is invalid - " + fieldErrors[i].message + "</div>";
+				}
+				$paymentForm.after(errorList);
+			}
+		} else {
+			// The token contains id, last4, and card type
+			var token = data["id"];
+			console.log('#### token = ', token);
+			var amount = $('#amount').val();
+			console.log('##### Charging amount = ', amount);
+			/*
+			 $.post("/charge.php", { simplifyToken: token, amount: amount}, function (data){
+			 console.log('#### Success', data);
+			 });
+			 */
+			var request = $.ajax({
+				url: "/charge.php",
+				type: "POST",
+				data: { simplifyToken: token, amount: amount},
+				dataType: "html"
+			});
+
+			request.done(function( msg ) {
+				alert("Payment successfully processed!")
+			});
+
+			request.fail(function( jqXHR, textStatus ) {
+				console.error('Payment processing failed = ', jqXHR, textStatus);
+			});
+		}
+	}
 </script>
 </body>
 </html>
