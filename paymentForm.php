@@ -83,14 +83,6 @@
 						<option value="12">Dec</option>
 					</select>
 					<select id="cc-exp-year" class="w-select">
-						<option value="15">2015</option>
-						<option value="16">2016</option>
-						<option value="17">2017</option>
-						<option value="18">2018</option>
-						<option value="19">2019</option>
-						<option value="20">2020</option>
-						<option value="21">2021</option>
-						<option value="22">2022</option>
 					</select>
 			</tr>
 		</table>
@@ -124,6 +116,13 @@
 				}
 			}, simplifyResponseHandler);
 		});
+
+		var selYear = $('#cc-exp-year');
+
+		var year = new Date().getFullYear();
+		for(; year < year + 10; year++) {
+			selYear.append("<option value='" + year.toString().substr(2) + "'>" + year +"</option>" );
+		}
 	});
 
 	function simplifyResponseHandler(data) {
