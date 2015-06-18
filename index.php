@@ -36,6 +36,7 @@
 
  <body>
  <div class="container">
+	 <img class="text-center" src="https://raw.githubusercontent.com/simplifycom/simplify-php-server/master/simplifyLogo.png"/>
 	 <h1 class="text-center"><?php echo 'Heya... server is up and running!' ?></h1>
 	 <h3 class="text-center">
 		 You can start running test payments from this <a href="paymentForm.php">payment form</a> page ...
