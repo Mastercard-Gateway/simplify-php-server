@@ -23,22 +23,90 @@
 			font-family: 'Avenir Next', Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 			text-rendering: optimizeLegibility;
 		}
+
 		h1 {
 			font-family: 'Avenir Next', Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 		}
+
 		.footer-section {
 			margin-top: 10px;
 		}
+
 		.error {
 			color: red;
 		}
+
 		.message {
 			margin-top: 50px;
 		}
 	</style>
-		<?php
-			$publicKey = getenv('SIMPLIFY_API_PUBLIC_KEY');
-		?>
+	<?php
+	$publicKey = getenv('SIMPLIFY_API_PUBLIC_KEY');
+	?>
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript" src="//www.simplify.com/commerce/v1/simplify.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			var selYear = $('#cc-exp-year');
+
+			var currentYear = new Date().getFullYear();
+			for (var year = currentYear; year < currentYear + 10; year++) {
+				selYear.append("<option " + ((year === (currentYear + 1)) ? " selected " : "") + " value='" + year.toString().substr(2) + "'>" + year + "</option>");
+			}
+
+			$("#process-payment-btn").click(function () {
+				// Disable the submit button
+				$("#process-payment-btn").attr("disabled", "disabled");
+				// Generate a card token & handle the response
+				SimplifyCommerce.generateToken({
+					key: "<?echo $publicKey?>",
+					card: {
+						number: $("#cc-number").val(),
+						cvc: $("#cc-cvc").val(),
+						expMonth: $("#cc-exp-month").val(),
+						expYear: $("#cc-exp-year").val()
+					}
+				}, simplifyResponseHandler);
+			});
+
+		});
+
+		function simplifyResponseHandler(data) {
+			var $error = $(".error");
+			$error.html("");
+			$("#process-payment-btn").removeAttr("disabled");
+			if (data.error) {
+				console.error("Error creating card token", data);
+				if (data.error.code == "validation") {
+					var fieldErrors = data.error.fieldErrors,
+						fieldErrorsLength = fieldErrors.length,
+						errorMessage = "";
+					for (var i = 0; i < fieldErrorsLength; i++) {
+						errorMessage += " Field: '" + fieldErrors[i].field +
+							"' is invalid - " + fieldErrors[i].message;
+					}
+					$error.text(errorMessage);
+				}
+			} else {
+				var token = data["id"];
+				var amount = $('#amount').val();
+				var request = $.ajax({
+					url: "/charge.php",
+					type: "POST",
+					data: { simplifyToken: token, amount: amount},
+					dataType: "html"
+				});
+
+				request.done(function (msg) {
+					alert("Payment successfully processed!")
+				});
+
+				request.fail(function (jqXHR, textStatus) {
+					console.error('Payment processing failed = ', jqXHR, textStatus);
+				});
+			}
+		}
+	</script>
 </head>
 <body>
 <div class="w-container message">
@@ -49,14 +117,16 @@
 		<table width="100%">
 			<tr>
 				<td><label class="text">Amount in cents (i.e. 50 = $0.50)</label></td>
-				<td><label class="text"><input id="amount"  class="w-input" type="text" maxlength="10" autocomplete="off" value="100" autofocus
-														   placeholder="Enter Amount"/>
+				<td><label class="text"><input id="amount" class="w-input" type="text" maxlength="10" autocomplete="off"
+											   value="100" autofocus
+											   placeholder="Enter Amount"/>
 					</label></td>
 			</tr>
 			<tr>
 				<td><label class="text">Credit Card Number: </label></td>
 				<td>
-					<input id="cc-number" type="text" class="w-input" maxlength="20" autocomplete="off" value="5555555555554444"/>
+					<input id="cc-number" type="text" class="w-input" maxlength="20" autocomplete="off"
+						   value="5555555555554444"/>
 					</label></td>
 			</tr>
 			<tr>
@@ -87,8 +157,8 @@
 			</tr>
 		</table>
 		<div class="footer-section">
-				<button id="process-payment-btn" class="w-button">Process Payment</button>
-				<div class="error"></div>
+			<button id="process-payment-btn" class="w-button">Process Payment</button>
+			<div class="error"></div>
 		</div>
 	</form>
 </div>
@@ -96,69 +166,5 @@
 	<div class="logo-container"><img class="logo" src="images/simplifyLogo@2x.png" width="102">
 	</div>
 </div>
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript" src="//www.simplify.com/commerce/v1/simplify.js"></script>
-<script type="text/javascript">
-	$(document).ready(function () {
-		var selYear = $('#cc-exp-year');
-
-		var currentYear = new Date().getFullYear();
-		for(var year = currentYear; year < currentYear + 10; year++) {
-			selYear.append("<option " + ((year === (currentYear + 1)) ? " selected " : "") + " value='" + year.toString().substr(2) + "'>" + year +"</option>" );
-		}
-
-		$("#process-payment-btn").click(function () {
-			// Disable the submit button
-			$("#process-payment-btn").attr("disabled", "disabled");
-			// Generate a card token & handle the response
-			SimplifyCommerce.generateToken({
-				key: "<?echo $publicKey?>",
-				card: {
-					number: $("#cc-number").val(),
-					cvc: $("#cc-cvc").val(),
-					expMonth: $("#cc-exp-month").val(),
-					expYear: $("#cc-exp-year").val()
-				}
-			}, simplifyResponseHandler);
-		});
-
-	});
-
-	function simplifyResponseHandler(data) {
-		var $error = $(".error");
-		$error.html("");
-		$("#process-payment-btn").removeAttr("disabled");
-		if (data.error) {
-			console.error("Error creating card token", data);
-			if (data.error.code == "validation") {
-				var fieldErrors = data.error.fieldErrors,
-					fieldErrorsLength = fieldErrors.length,
-					errorMessage = "";
-				for (var i = 0; i < fieldErrorsLength; i++) {
-					errorMessage += " Field: '" + fieldErrors[i].field +
-						"' is invalid - " + fieldErrors[i].message;
-				}
-				$error.text(errorMessage);
-			}
-		} else {
-			var token = data["id"];
-			var amount = $('#amount').val();
-			var request = $.ajax({
-				url: "/charge.php",
-				type: "POST",
-				data: { simplifyToken: token, amount: amount},
-				dataType: "html"
-			});
-
-			request.done(function( msg ) {
-				alert("Payment successfully processed!")
-			});
-
-			request.fail(function( jqXHR, textStatus ) {
-				console.error('Payment processing failed = ', jqXHR, textStatus);
-			});
-		}
-	}
-</script>
 </body>
 </html>
