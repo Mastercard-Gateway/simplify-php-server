@@ -39,6 +39,10 @@
 		.message {
 			margin-top: 50px;
 		}
+		.w-button {
+			background-color: #f60;
+			border-radius: 3px;
+		}
 	</style>
 	<?php
 	$publicKey = getenv('SIMPLIFY_API_PUBLIC_KEY');
@@ -155,9 +159,14 @@
 					<select id="cc-exp-year" class="w-select">
 					</select>
 			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<button id="process-payment-btn" class="w-button">Process Payment</button>
+				</td>
+			</tr>
 		</table>
 		<div class="footer-section">
-			<button id="process-payment-btn" class="w-button">Process Payment</button>
 			<div class="error"></div>
 		</div>
 	</form>
