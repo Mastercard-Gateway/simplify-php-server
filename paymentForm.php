@@ -162,7 +162,7 @@
 			<tr>
 				<td></td>
 				<td>
-					<button id="process-payment-btn" class="w-button">Process Payment</button>
+					<button id="process-payment-btn" class="w-button">Run Test Payment</button>
 				</td>
 			</tr>
 		</table>
