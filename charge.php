@@ -42,19 +42,22 @@ if (!isset($_POST["amount"]) || !isset($_POST['simplifyToken'])) {
 }
 
 $token = $_POST['simplifyToken'];
-$charge = $_POST["amount"];
+$payment = $_POST["amount"];
 
-$payment = array(
-	'amount' => $charge,
+$paymentPayload = array(
+	'amount' => $payment,
 	'token' => $token,
 	'description' => 'payment description',
 	'currency' => 'USD'
 );
 try {
-	$charge = Simplify_Payment::createPayment($payment);
-	$chargeId = $charge->{'id'};
-	echo $chargeId;
+	$payment = Simplify_Payment::createPayment($paymentPayload);
+	if ($payment->paymentStatus == 'APPROVED') {
+		//return payment id
+		echo $payment->{'id'};
+	}
 } catch (Exception $e) {
-	echo ' Caught exception: ', $e->getMessage(), "\n", $e;
+	//	echo ' Caught exception: ', $e->getMessage(), "\n", $e;
+	header('Status: 400 '.$e->getMessage(). ' ' . $e);
 }
 ?>
