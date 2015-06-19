@@ -104,7 +104,7 @@
 						errorMessage += " Field: '" + fieldErrors[i].field +
 							"' is invalid - " + fieldErrors[i].message + "<br/>";
 					}
-					$error.html(errorMessage).fadeIn();
+					$error.html("<h3>" + errorMessage + "</h3>").fadeIn();
 				}
 			} else {
 				var token = data["id"];
