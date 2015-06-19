@@ -27,45 +27,34 @@
  * SUCH DAMAGE.
  */
 
-/*    Instructions:
-  *    1. Replace public key and private key with your respective API keys
-  *    2. This sample code charges $10 to the card token submitted. You can pass the charge parameter by uncommenting
-  *       the charge parameter
-  */
 header('Content-Type: application/json');
 error_reporting(E_ALL);
 
-require_once("./lib/Simplify.php");
+require_once("./sdk/lib/Simplify.php");
 
 Simplify::$publicKey = getenv('SIMPLIFY_API_PUBLIC_KEY');
 Simplify::$privateKey = getenv('SIMPLIFY_API_PRIVATE_KEY');
 
 
-$token = $_POST['simplifyToken'];
-//You can get the charge from the client by uncommenting line below
-// $charge = $_POST['charge'];
-
-$charge = 1000;
-
-if (isset($_POST["amount"]) && !empty($_POST["amount"])) {
-	$charge = $_POST["amount"];
+if (!isset($_POST["amount"]) || !isset($_POST['simplifyToken'])) {
+	echo "Please submit POST values with amount & simplifyToken params!";
+	return;
 }
 
-$c = array(
+$token = $_POST['simplifyToken'];
+$charge = $_POST["amount"];
+
+$payment = array(
 	'amount' => $charge,
 	'token' => $token,
-	'description' => 'product description',
+	'description' => 'payment description',
 	'currency' => 'USD'
-
 );
 try {
-	$charge = Simplify_Payment::createPayment($c);
-
+	$charge = Simplify_Payment::createPayment($payment);
 	$chargeId = $charge->{'id'};
-	echo $charge->{'paymentStatus'} . " charged :" . $charge->{'amount'} / 100;
-
+	echo $chargeId;
 } catch (Exception $e) {
 	echo ' Caught exception: ', $e->getMessage(), "\n", $e;
 }
-
 ?>
