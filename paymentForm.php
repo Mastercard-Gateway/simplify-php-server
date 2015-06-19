@@ -113,8 +113,7 @@
 				var request = $.ajax({
 					url: "/charge.php",
 					type: "POST",
-					data: { simplifyToken: token, amount: amount},
-					dataType: "html"
+					data: { simplifyToken: token, amount: amount}
 				});
 
 				request.done(function (response) {
