@@ -119,7 +119,7 @@
 				request.done(function (response) {
 					console.log("Response = ", response);
 					if (response.id) {
-						$success.html("<h4>Payment successfully processed & payment id = " + response.id + " !</h4>").fadeIn();
+						$success.html("Payment successfully processed & payment id = " + response.id + " !").fadeIn();
 					}
 					else if (response.status) {
 						$error.html("Payment failed with status = " + response.status + " !").fadeIn();
@@ -195,7 +195,7 @@
 			<div class="success"></div>
 			<div class="error"></div>
 			<div class="text">For more test cards, please checkout this <a class="link" target="_new"
-																		   href="https://www.simplify.com/commerce/docs/tutorial/index#testing">page</a>.
+																		   href="https://www.simplify.com/commerce/docs/tutorial/index#testing">page.</a>
 			</div>
 		</div>
 	</form>
