@@ -55,9 +55,11 @@ try {
 	if ($payment->paymentStatus == 'APPROVED') {
 		//return payment id
 		echo $payment->{'id'};
+		return;
 	}
+	header('HTTP/1.1 400 Payment failed with status = ' . $payment->paymentStatus . '!');
 } catch (Exception $e) {
 	//	echo ' Caught exception: ', $e->getMessage(), "\n", $e;
-	header('Status: 400 '.$e->getMessage(). ' ' . $e);
+	header('HTTP/1.1 400 Payment failed with status = ' . $e->getMessage() . ' ' . $e);
 }
 ?>
