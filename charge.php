@@ -43,25 +43,27 @@ if (!isset($_POST["amount"]) || !isset($_POST['simplifyToken'])) {
 
 $token = $_POST['simplifyToken'];
 $payment = $_POST["amount"];
+$currency = isset($_POST["currency"]) ? $_POST["currency"] : 'USD';
 
 $paymentPayload = array(
 	'amount' => $payment,
 	'token' => $token,
-	'description' => 'payment description',
-	'currency' => 'USD'
+	'description' => 'Test payment',
+	'currency' => $currency
 );
-$result = array();
+$response = array();
 try {
 	$payment = Simplify_Payment::createPayment($paymentPayload);
 	if ($payment->paymentStatus == 'APPROVED') {
-		$result["id"] = $payment->{'id'};
+		$response["id"] = $payment->{'id'};
 	}
-	$result["status"] = $payment->paymentStatus;
+	$response["status"] = $payment->paymentStatus;
 } catch (Exception $e) {
+	//error handling
 	if ($e instanceof Simplify_ApiException) {
-		$result["reference"] = $e->getReference();
-		$result["message"] = $e->getMessage();
-		$result["errorCode"] = $e->getErrorCode();
+		$response["reference"] = $e->getReference();
+		$response["message"] = $e->getMessage();
+		$response["errorCode"] = $e->getErrorCode();
 	}
 	if ($e instanceof Simplify_BadRequestException && $e->hasFieldErrors()) {
 		$fieldErrors = '';
@@ -69,10 +71,11 @@ try {
 			$fieldErrors = $fieldErrors . $fieldError->getFieldName()
 				. ": '" . $fieldError->getMessage()
 				. "' (" . $fieldError->getErrorCode()
-				. ")\n";
+				. ")";
 		}
-		$result["fieldErrors"] = $fieldErrors;
+		$response["fieldErrors"] = $fieldErrors;
 	}
+	$response["error"] = $e->getMessage();
 }
-echo json_encode($result);
+echo json_encode($response);
 ?>
