@@ -119,7 +119,7 @@
 				request.done(function (response) {
 					console.log("##### response = ", response);
 					if (response.id) {
-						$success.html("<h3>Payment successfully process payment id = " + response.id + " !</h3>").fadeIn();
+						$success.html("<h4>Payment successfully processed & payment id = " + response.id + " !</h4>").fadeIn();
 					}
 					else {
 						$error.html("Payment failed with status = " + response.status + " !").fadeIn();
