@@ -121,8 +121,11 @@
 					if (response.id) {
 						$success.html("<h4>Payment successfully processed & payment id = " + response.id + " !</h4>").fadeIn();
 					}
-					else {
+					else if (response.status) {
 						$error.html("Payment failed with status = " + response.status + " !").fadeIn();
+					}
+					else if (response.error) {
+						$error.html(response.error).fadeIn();
 					}
 				});
 
