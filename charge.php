@@ -50,16 +50,15 @@ $paymentPayload = array(
 	'description' => 'payment description',
 	'currency' => 'USD'
 );
+$result = array();
 try {
 	$payment = Simplify_Payment::createPayment($paymentPayload);
 	if ($payment->paymentStatus == 'APPROVED') {
-		//return payment id
-		echo $payment->{'id'};
-		return;
+		$result["id"] = $payment->{'id'};
 	}
-	header('HTTP/1.1 400 Payment failed with status = ' . $payment->paymentStatus . '!');
+	$result["status"] = $payment->paymentStatus;
+	echo json_encode($payment->paymentStatus);
 } catch (Exception $e) {
-	//	echo ' Caught exception: ', $e->getMessage(), "\n", $e;
-	header('HTTP/1.1 400 Payment failed with status = ' . $e->getMessage() . ' ' . $e);
+	echo 'Error creating payment - ', $e->getMessage(), "\n", $e;
 }
 ?>
