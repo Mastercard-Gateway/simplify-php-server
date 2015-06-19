@@ -48,6 +48,9 @@
 			background-color: #f60;
 			border-radius: 3px;
 		}
+		.busy-container {
+			display: none;
+		}
 	</style>
 	<?php
 	$publicKey = getenv('SIMPLIFY_API_PUBLIC_KEY');
@@ -55,12 +58,13 @@
 	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script type="text/javascript" src="//www.simplify.com/commerce/v1/simplify.js"></script>
 	<script type="text/javascript">
-		var $selYear, $error, $success, $paymentBtn;
+		var $error, $success, $paymentBtn, $busyContainer;
 		$(document).ready(function () {
-			$selYear = $('#cc-exp-year');
+			var $selYear = $('#cc-exp-year');
 			$error = $(".error");
 			$success = $(".success");
 			$paymentBtn = $("#process-payment-btn");
+			$busyContainer = $('.busy-container');
 
 			var currentYear = new Date().getFullYear();
 			for (var year = currentYear; year < currentYear + 10; year++) {
@@ -68,6 +72,7 @@
 			}
 
 			$paymentBtn.click(function () {
+				$busyContainer.fadeOut();
 				$error.html("");
 				$success.html("");
 				// Disable the submit button
@@ -87,6 +92,7 @@
 		});
 
 		function simplifyResponseHandler(data) {
+			$busyContainer.fadeOut();
 			$paymentBtn.removeAttr("disabled");
 			if (data.error) {
 				console.error("Error creating card token", data);
@@ -176,6 +182,7 @@
 			</tr>
 		</table>
 		<div class="footer-section">
+			<div class="busy-container"><img src="images/ajax-loader.gif"/></div>
 			<div class="success"></div>
 			<div class="error"></div>
 			<div class="text">For more test cards, please checkout this <a class="link" target="_new"
