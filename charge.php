@@ -60,7 +60,7 @@ try {
 } catch (Exception $e) {
 	if ($e instanceof Simplify_ApiException) {
 		$result["reference"] = $e->getReference();
-		$result["message"] = $e->getReference();
+		$result["message"] = $e->getMessage();
 		$result["errorCode"] = $e->getErrorCode();
 	}
 	if ($e instanceof Simplify_BadRequestException && $e->hasFieldErrors()) {
