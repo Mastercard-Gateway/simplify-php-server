@@ -117,6 +117,7 @@
 				});
 
 				request.done(function (msg) {
+					console.log("##### msg = ", msg);
 					$('.success').html("<h3>Payment successfully processed!</h3>").fadeIn();
 				});
 
