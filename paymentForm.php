@@ -125,7 +125,7 @@
 						$error.html("Payment failed with status = " + response.status + " !").fadeIn();
 					}
 					else {
-						$error.html(JSON.stringify(response)).fadeIn();
+						$error.html("Payment failed with response... <br/> " + JSON.stringify(response)).fadeIn();
 					}
 				});
 
