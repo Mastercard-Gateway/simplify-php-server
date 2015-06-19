@@ -58,9 +58,20 @@ try {
 	}
 	$result["status"] = $payment->paymentStatus;
 } catch (Exception $e) {
-	$result["error"] = $e->getMessage();
-	if ($e->fieldErrors) {
-		$result["fieldErrors"] = $e->fieldErrors;
+	if ($e instanceof Simplify_ApiException) {
+		$result["reference"] = $e->getReference();
+		$result["message"] = $e->getReference();
+		$result["errorCode"] = $e->getErrorCode();
+	}
+	if ($e instanceof Simplify_BadRequestException && $e->hasFieldErrors()) {
+		$fieldErrors = '';
+		foreach ($e->getFieldErrors() as $fieldError) {
+			$fieldErrors = $fieldErrors . $fieldError->getFieldName()
+				. ": '" . $fieldError->getMessage()
+				. "' (" . $fieldError->getErrorCode()
+				. ")\n";
+		}
+		$result["fieldErrors"] = $fieldErrors;
 	}
 }
 echo json_encode($result);
