@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>Simplify Test Payment Form</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="generator" content="Webflow">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="css/webflow.css">
 	<link rel="stylesheet" type="text/css" href="css/simplify-test.webflow.css">
