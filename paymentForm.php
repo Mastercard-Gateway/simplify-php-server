@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>Simplify Test Payment Form</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="css/webflow.css">
 	<link rel="stylesheet" type="text/css" href="css/simplify-test.webflow.css">
@@ -48,6 +48,7 @@
 			background-color: #f60;
 			border-radius: 3px;
 		}
+
 		.busy-container {
 			display: none;
 		}
@@ -116,13 +117,18 @@
 					dataType: "html"
 				});
 
-				request.done(function (msg) {
-					console.log("##### msg = ", msg);
-					$('.success').html("<h3>Payment successfully processed!</h3>").fadeIn();
+				request.done(function (response) {
+					console.log("##### response = ", response);
+					if (response.id) {
+						$success.html("<h3>Payment successfully process payment id = " + response.id + " !</h3>").fadeIn();
+					}
+					else {
+						$error.html("Payment failed with status = " + response.status + " !").fadeIn();
+					}
 				});
 
-				request.fail(function (jqXHR, textStatus) {
-					console.error('Payment processing failed = ', jqXHR, textStatus);
+				request.fail(function (jqXHR, status) {
+					console.error('Payment processing failed = ', jqXHR, status);
 				});
 			}
 		}

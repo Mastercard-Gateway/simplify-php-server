@@ -57,8 +57,8 @@ try {
 		$result["id"] = $payment->{'id'};
 	}
 	$result["status"] = $payment->paymentStatus;
-	echo json_encode($result);
 } catch (Exception $e) {
-	echo 'Error creating payment - ', $e->getMessage(), "\n", $e;
+	$result["error"] = $e->getMessage() . "\n" . $e;
 }
+echo json_encode($result);
 ?>
