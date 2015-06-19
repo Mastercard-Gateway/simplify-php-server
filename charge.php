@@ -58,7 +58,10 @@ try {
 	}
 	$result["status"] = $payment->paymentStatus;
 } catch (Exception $e) {
-	$result["error"] = $e->getMessage() . "\n" . $e;
+	$result["error"] = $e->getMessage();
+	if ($e->fieldErrors) {
+		$result["fieldErrors"] = $e->fieldErrors;
+	}
 }
 echo json_encode($result);
 ?>

@@ -117,7 +117,7 @@
 				});
 
 				request.done(function (response) {
-					console.log("##### response = ", response);
+					console.log("Response = ", response);
 					if (response.id) {
 						$success.html("<h4>Payment successfully processed & payment id = " + response.id + " !</h4>").fadeIn();
 					}
