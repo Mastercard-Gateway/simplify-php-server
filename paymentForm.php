@@ -72,9 +72,9 @@
 			}
 
 			$paymentBtn.click(function () {
-				$busyContainer.fadeOut();
-				$error.html("");
-				$success.html("");
+				$busyContainer.fadeIn();
+				$error.fadeOut().html("");
+				$success.fadeOut().html("");
 				// Disable the submit button
 				$paymentBtn.attr("disabled", "disabled");
 				// Generate a card token & handle the response
@@ -104,7 +104,7 @@
 						errorMessage += " Field: '" + fieldErrors[i].field +
 							"' is invalid - " + fieldErrors[i].message + "<br/>";
 					}
-					$error.html(errorMessage);
+					$error.html(errorMessage).fadeIn();
 				}
 			} else {
 				var token = data["id"];
@@ -117,7 +117,7 @@
 				});
 
 				request.done(function (msg) {
-					$('.success').html("<h3>Payment successfully processed!</h3>");
+					$('.success').html("<h3>Payment successfully processed!</h3>").fadeIn();
 				});
 
 				request.fail(function (jqXHR, textStatus) {
