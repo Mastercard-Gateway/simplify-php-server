@@ -27,45 +27,55 @@
  * SUCH DAMAGE.
  */
 
-/*    Instructions:
-  *    1. Replace public key and private key with your respective API keys
-  *    2. This sample code charges $10 to the card token submitted. You can pass the charge parameter by uncommenting
-  *       the charge parameter
-  */
 header('Content-Type: application/json');
 error_reporting(E_ALL);
 
-require_once("./lib/Simplify.php");
+require_once("./sdk/lib/Simplify.php");
 
 Simplify::$publicKey = getenv('SIMPLIFY_API_PUBLIC_KEY');
 Simplify::$privateKey = getenv('SIMPLIFY_API_PRIVATE_KEY');
 
 
+if (!isset($_POST["amount"]) || !isset($_POST['simplifyToken'])) {
+	echo "Please submit POST values with amount & simplifyToken params!";
+	return;
+}
+
 $token = $_POST['simplifyToken'];
-//You can get the charge from the client by uncommenting line below
-// $charge = $_POST['charge'];
+$payment = $_POST["amount"];
+$currency = isset($_POST["currency"]) ? $_POST["currency"] : 'USD';
 
-$charge = 1000;
-
-if (isset($_POST["amount"]) && !empty($_POST["amount"])) {
-	$charge = $_POST["amount"];
-}
-
-$c = array(
-	'amount' => $charge,
+$paymentPayload = array(
+	'amount' => $payment,
 	'token' => $token,
-	'description' => 'product description',
-	'currency' => 'USD'
-
+	'description' => 'Test payment',
+	'currency' => $currency
 );
+$response = array();
 try {
-	$charge = Simplify_Payment::createPayment($c);
-
-	$chargeId = $charge->{'id'};
-	echo $charge->{'paymentStatus'} . " charged :" . $charge->{'amount'} / 100;
-
+	$payment = Simplify_Payment::createPayment($paymentPayload);
+	if ($payment->paymentStatus == 'APPROVED') {
+		$response["id"] = $payment->{'id'};
+	}
+	$response["status"] = $payment->paymentStatus;
 } catch (Exception $e) {
-	echo ' Caught exception: ', $e->getMessage(), "\n", $e;
+	//error handling
+	if ($e instanceof Simplify_ApiException) {
+		$response["reference"] = $e->getReference();
+		$response["message"] = $e->getMessage();
+		$response["errorCode"] = $e->getErrorCode();
+	}
+	if ($e instanceof Simplify_BadRequestException && $e->hasFieldErrors()) {
+		$fieldErrors = '';
+		foreach ($e->getFieldErrors() as $fieldError) {
+			$fieldErrors = $fieldErrors . $fieldError->getFieldName()
+				. ": '" . $fieldError->getMessage()
+				. "' (" . $fieldError->getErrorCode()
+				. ")";
+		}
+		$response["fieldErrors"] = $fieldErrors;
+	}
+	$response["error"] = $e->getMessage();
 }
-
+echo json_encode($response);
 ?>

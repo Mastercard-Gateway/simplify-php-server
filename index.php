@@ -1,51 +1,45 @@
- <?php
-/*
- * Copyright (c) 2013, MasterCard International Incorporated
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- * Redistributions of source code must retain the above copyright notice, this list of
- * conditions and the following disclaimer.
- * Redistributions in binary form must reproduce the above copyright notice, this list of
- * conditions and the following disclaimer in the documentation and/or other materials
- * provided with the distribution.
- * Neither the name of the MasterCard International Incorporated nor the names of its
- * contributors may be used to endorse or promote products derived from this software
- * without specific prior written permission.
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
- * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
- * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
- * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- */
-
- ?>
-
- <!DOCTYPE html>
- <html lang="en">
- <head>
-
- </head>
-
- <body>
- <?php echo 'Server is up' ?>
-
- <br/>
- <h3>
-	 You can start running test payments from this <a href="paymentForm.php">payment form</a> page ...
- </h3>
-
- <h3>
-	 For running payments from your mobile applications, you can POST <i>simplifyToken</i> & <i>amount</i> to charge.php...
- </h3>
-
- </body>
-
- </html>
+<!DOCTYPE html>
+<html data-wf-site="5582f9e5792714e458bb85b8" data-wf-page="5582f9e5792714e458bb85b9">
+<head>
+	<meta charset="utf-8">
+	<title>Simplify PHP starter app</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="css/webflow.css">
+	<link rel="stylesheet" type="text/css" href="css/simplify-test.webflow.css">
+	<script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+	<script>
+		WebFont.load({
+			google: {
+				families: ["Inconsolata:400,400italic,700,700italic"]
+			}
+		});
+	</script>
+	<script type="text/javascript" src="js/modernizr.js"></script>
+	<link rel="apple-touch-icon" href="//daks2k3a4ib2z.cloudfront.net/img/webclip.png">
+	<style>
+		body {
+			font-family: 'Avenir Next', Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+			text-rendering: optimizeLegibility;
+		}
+		h1 {
+			font-family: 'Avenir Next', Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+		}
+	</style>
+</head>
+<body>
+<div class="w-container message">
+	<div>
+		<h1 class="main-message">Good news! The server is up and running.</h1>
+	</div>
+	<div class="text">You can start running test payments from <a class="link" href="paymentForm.php">this payment form page.<br></a>
+	</div>
+	<div class="text">For running payments from your mobile applications, you can post <span class="code">simplifyToken</span> and <span class="code">amount</span> params to <span class="webpage">charge.php</span>.</div>
+</div>
+<div class="w-section footer-section">
+	<div class="logo-container"><img class="logo" src="images/simplifyLogo@2x.png" width="102">
+	</div>
+</div>
+</body>
+</html>
