@@ -185,6 +185,7 @@
 					</select>
 			</tr>
 			<tr>
+				<td><label class="text">Currency: </label></td>
 				<td>
 					<select id="currency">
 					<option value="AED">UAE Dirham</option>
@@ -322,7 +323,7 @@
 					<option value="TZS">Tanzanian Shilling</option>
 					<option value="UAH">Hryvnia</option>
 					<option value="UGX">Uganda Shilling</option>
-					<option default value="USD">US Dollar</option>
+					<option selected="selected" value="USD">US Dollar</option>
 					<option value="UYU">Peso Uruguayo</option>
 					<option value="UZS">Uzbekistan Sum</option>
 					<option value="VEF">Bolivar</option>
