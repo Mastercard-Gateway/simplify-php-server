@@ -50,7 +50,7 @@ This is an companion application to help developers start building mobile applic
     URL url = null;
     HttpURLConnection con = null;
     try {
-       URL url = new URL("http://simplifypay.herokuapp.com//charge.php");
+       URL url = new URL("YOUR_HEROKU_URL");
        HttpURLConnection con = (HttpURLConnection) url.openConnection();
         //add reuqest header
         con.setRequestMethod("POST");
